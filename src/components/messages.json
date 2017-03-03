@@ -1,0 +1,16 @@
+{
+  "messages": {
+    "0": {
+      "message": "First message in firebase",
+      "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+      "author": "Pratik Infanto",
+      "profilePic": "https://drive.google.com/file/d/0BwAeqRj53zwFUGdNRnMyc21pQmM/view?usp=sharing"
+    },
+    "1": {
+      "message": "First message in flux",
+      "date": "Wed, 08 Jul 2015 18:14:27 GMT",
+      "author": "Pratik Infanto",
+      "profilePic": "https://drive.google.com/file/d/0BwAeqRj53zwFUGdNRnMyc21pQmM/view?usp=sharing"
+    }
+  }
+}
