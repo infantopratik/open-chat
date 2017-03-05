@@ -4,15 +4,27 @@ import React from 'react';
 import MessageList from './MessageList';
 import ChannelList from './ChannelList';
 import MessageBox from './MessageBox';
+import Login from './Login';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ChatStore from '../stores/ChatStore';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Colors from 'material-ui/styles/colors'
 import AppBar from 'material-ui/AppBar'
 
+@connectToStores
 class App extends React.Component{
 	constructor(){
 		super();
+	}
+
+	static getStores(){
+		return [ChatStore];
+	}
+
+	static getPropsFromStores(){
+		return ChatStore.getState();
 	}
 
 	/*static childContextTypes = {
@@ -35,21 +47,29 @@ class App extends React.Component{
 		  }
 		});
 
+		var view = <Login />
+
+		if(this.props.user){
+			view = <div>
+				<div style={{
+						display: 'flex',
+						flexFlow: 'row wrap',
+						maxWidth: '80%',
+						width: '100%',
+						margin: '30px auto 30px'
+					}}>
+					<ChannelList />
+					<MessageList />
+				</div>
+				<MessageBox />
+			</div>
+		}
+
 		return(
 			<MuiThemeProvider muiTheme={muiTheme}>
 				<div>
 					<AppBar title="Open Chat"/>
-					<div style={{
-						display: 'flex',
-						flexFlow: 'row wrap',
-						maxWidth: 1600,
-						width: '100%',
-						margin: '30px auto 30px'
-					}}>
-						<ChannelList />
-						<MessageList />
-					</div>
-					<MessageBox />
+					{{view}}
 				</div>
 			</MuiThemeProvider>
 		);

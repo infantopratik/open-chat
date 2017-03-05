@@ -39,7 +39,7 @@ export default class MessageBox extends React.Component {
   render() {
     return (
       <Card style={{
-      	maxWidth: 1600,
+      	maxWidth: '80%',
       	margin: '30px auto',
       	padding: 30
       }}>
