@@ -3,19 +3,19 @@ import firebase from 'firebase';
 import {auth, firebaseMain} from '../firebase';
 
 class Actions{
+	constructor(){
+		this.generateActions(
+			'channelsReceived',
+			'channelsFailed',
+			'messagesReceived',
+			'messagesFailed',
+			'channelOpened'
+		)
+	}
+
 	login(args){
 		return (dispatch) => {
-
-			/*firebaseMain.authWithOAuthPopup("google", (error, user)=> {
-				if(error){
-					return;
-				}
-
-				dispatch(user);
-			});*/
-
 			var provider = new firebase.auth.GoogleAuthProvider();
-
 			auth.signInWithPopup(provider).then(function(result) {
 				var token = result.credential.accessToken;
 				var user = result.user;

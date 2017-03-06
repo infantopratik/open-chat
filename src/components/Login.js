@@ -34,6 +34,7 @@ export default class Login extends React.Component {
 		  			}}
 		  			onClick={() => { this.onClick() }}
 		  			label="Log in Google Account"
+		  			primary={true}
 		  		/>
 		  	</Card>
 		);
