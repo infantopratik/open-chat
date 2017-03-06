@@ -69,7 +69,7 @@ class App extends React.Component{
 			<MuiThemeProvider muiTheme={muiTheme}>
 				<div>
 					<AppBar title="Open Chat"/>
-					{{view}}
+					{view}
 				</div>
 			</MuiThemeProvider>
 		);

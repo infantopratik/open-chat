@@ -32,7 +32,7 @@ export default class Login extends React.Component {
 		  			style={{
 		  				display: 'block',
 		  			}}
-		  			onClick={this.onClick.bind(this)}
+		  			onClick={() => { this.onClick() }}
 		  			label="Log in Google Account"
 		  		/>
 		  	</Card>
