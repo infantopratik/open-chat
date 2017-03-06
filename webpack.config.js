@@ -22,14 +22,14 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-	            test: /\.jsx?$/,
+	            test: /\.js?$/,
 	            exclude: /node_modules/,
 	            loader: ['react-hot-loader'],
 	        },
 			{
-				test: /\.jsx?$/,
+				test: /\.js?$/,
 				include: path.join(__dirname, 'src'),
-				loader: ['babel-loader?presets[]=es2015,presets[]=react,presets[]=stage-0']
+				loader: ['babel-loader']
 			},
 			{
 				test: /\.scss$/,

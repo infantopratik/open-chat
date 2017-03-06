@@ -1,5 +1,7 @@
 import React from 'react';
 import Message from './Message';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ChatStore from '../stores/ChatStore';
 import {
 	Card,
 	List
@@ -7,6 +9,7 @@ import {
 import {database} from '../firebase';
 import _ from 'lodash';
 
+@connectToStores
 export default class MessageList extends React.Component {
   constructor(props) {
     super(props);
@@ -14,39 +17,27 @@ export default class MessageList extends React.Component {
 		messages : {},
 		id: 0
 	};
+  }
 
-	this.messagesRef = database.ref('/messages');
+  static getStores(){
+  	return [ChatStore];
+  }
 
-	this.messagesRef.on("child_added", (msg)=> {
-		if(this.state.messages[msg.key]){
-			return;
-		}
-
-		let msgVal = msg.val();
-		msgVal.key = msg.key;
-		this.state.messages[msgVal.key] = msgVal;
-		this.setState({
-			messages: this.state.messages 
-		});
-	});
-
-	this.messagesRef.on('child_removed', (msg)=>{
-		var key = msg.key;
-		delete this.state.messages[key];
-		this.setState({
-			messages: this.state.messages 
-		});
-	});
-
+  static getPropsFromStores(){
+  	return ChatStore.getState();
   }
 
   render() {
-  	var messageNodes = _.values(this.state.messages).map((message)=>{
-		return (
-			<Message key={this.state.id += 1} message={message.message}/>
-			// <div key={this.state.id += 1}>{message}</div>
-		);
-	});
+  	let messageNodes = null;
+
+  	if(this.props.messages){
+	  	messageNodes = _.values(this.props.messages).map((message)=>{
+			return (
+				<Message key={message.key} message={message.message}/>
+			);
+		});  		
+  	}
+
 
 	return (
 		<Card style={{

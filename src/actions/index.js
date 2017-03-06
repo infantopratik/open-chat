@@ -1,19 +1,24 @@
 import alt from '../alt';
 import firebase from 'firebase';
-import {auth} from '../database/database';
+import {auth, firebaseMain} from '../firebase';
 
 class Actions{
+	constructor(){
+		this.generateActions(
+			'channelsReceived',
+			'channelsFailed',
+			'messagesReceived',
+			'messagesFailed',
+			'channelOpened'
+		)
+	}
+
 	login(args){
 		return (dispatch) => {
 			var provider = new firebase.auth.GoogleAuthProvider();
-
 			auth.signInWithPopup(provider).then(function(result) {
-				// This gives you a Google Access Token. You can use it to access the Google API.
 				var token = result.credential.accessToken;
-				// The signed-in user info.
 				var user = result.user;
-				console.log('user', user);
-
 				dispatch(user);
 			}).catch(function(error) {
 				alert('error');
