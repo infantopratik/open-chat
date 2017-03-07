@@ -4,7 +4,8 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 import ChatStore from '../stores/ChatStore';
 import {
 	Card,
-	List
+	List,
+	CircularProgress
 } from 'material-ui';
 import {database} from '../firebase';
 import _ from 'lodash';
@@ -30,18 +31,29 @@ export default class MessageList extends React.Component {
   render() {
   	let messageNodes = null;
 
-  	if(this.props.messages){
+  	if(!this.props.messagesLoading){
 	  	messageNodes = _.values(this.props.messages).map((message)=>{
 			return (
-				<Message key={message.key} message={message.message}/>
+				<Message key={message.key} message={message}/>
 			);
 		});  		
+  	} else {
+  		messageNodes = <CircularProgress 
+  				mode = "indeterminate"
+  				style = {{
+  					paddingTop: 20,
+  					paddingBottom: 20,
+  					margin: '0 auto',
+  					display: 'block',
+  					width: '60px'
+  				}}
+  			/>
   	}
 
 
 	return (
 		<Card style={{
-			flexGrow: 4,
+			flexGrow: 2,
 			marginLeft: 30
 		}}>
 			<List>{messageNodes}</List>			

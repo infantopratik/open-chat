@@ -9,7 +9,12 @@ class Actions{
 			'channelsFailed',
 			'messagesReceived',
 			'messagesFailed',
-			'channelOpened'
+			'channelOpened',
+			'messagesLoading',
+			'sendMessage',
+			'sendMessageSuccess',
+			'sendMessageError',
+			'messageReceived'
 		)
 	}
 

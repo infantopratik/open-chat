@@ -11,8 +11,8 @@ export default class Message extends React.Component {
   render() {
     return (
       <ListItem
-      	leftAvatar={<Avatar src="../src/img.jpg" />}
-      >{this.props.message}</ListItem>
+      	leftAvatar={<Avatar src={this.props.message.profilePic} />}
+      >{this.props.message.message}</ListItem>
     );
   }
 }

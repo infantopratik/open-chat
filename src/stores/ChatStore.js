@@ -11,12 +11,26 @@ class ChatStore {
 	constructor() {
 		this.state = {
 			user: null,
-			messages: null
+			messages: null,
+			messagesLoading: true
 		}				
 	}
 
+	@bind(Actions.messagesLoading)
+	messagesLoading(){
+		this.setState({
+			messagesLoading: true 
+		});
+	}
+
+	@bind(Actions.sendMessage)
+	sendMessage(message){
+		this.state.message = message;
+		setTimeout(this.getInstance().sendMessage, 100);
+	}
+
 	@bind(Actions.messagesReceived)
-	recevedMessages(messages){
+	receivedMessages(messages){
 		_(messages)
 			.keys()
 			.each((key, index) => {
@@ -24,7 +38,21 @@ class ChatStore {
 			});
 
 		this.setState({
-			messages
+			messages,
+			messagesLoading: false
+		});
+	}
+
+	@bind(Actions.messageReceived)
+	messageReceived(msg){
+		if(this.state.messages[msg.key]){
+			return;
+		}
+
+		this.state.messages[msg.key] = msg;
+
+		this.setState({
+			messages: this.state.messages 
 		});
 	}
 
